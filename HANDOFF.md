@@ -13,6 +13,12 @@ Resolve the assigned milestone using the role boundaries in `AGENTS.md`.
 
 ## Decisions
 
+- **Owner-approved coordinator teams (owner, 2026-11-13)**: prefer the strongest suitable verified-free usable
+  coordinator; otherwise recommend a suitable usable coordinator from the current supervisor provider. Before launch
+  or substitution, ask the owner to approve the concrete team, cost, availability evidence, alternatives, and fallback,
+  then stop and wait. No silent coordinator substitution or inference that unknown pricing is free. Existing
+  qualifications, allow-lists, delegate fallback, and role rights remain unchanged. See `docs/PROVIDERS.md` and the
+  supervisor's project additions.
 - The supervisor alone merges or closes pull requests, using merge commits. Coordinators review and hand over; delegates implement their assigned issues.
 
 ## Tasks

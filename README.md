@@ -1,8 +1,10 @@
 # Milestone workspace
 
-A minimal, reusable Bive workspace for a supervisor, coordinators, and delegates. It contains role instructions, report templates, and required-check workflows, but no project history or user data.
+A minimal, reusable Bive workspace for the human owner, coordinators, delegates, and read-only advisors. It contains role instructions, report templates, and required-check workflows, but no project history or user data.
 
-Read `AGENTS.md`, `HANDOFF.md`, and `.bive/prompts/SUPERVISOR.md` first. The default OpenCode agent is `supervisor`; select the model for the current assignment explicitly.
+Read `AGENTS.md` and `HANDOFF.md` first, then the prompt of the role the owner assigns. There is no default OpenCode
+agent (the workspace once defaulted to the `supervisor` agent): the owner selects the agent and the model for each
+assignment. `.bive/prompts/SUPERVISOR.md` is a retired compatibility pointer; it grants no authority.
 
 ## Checks
 

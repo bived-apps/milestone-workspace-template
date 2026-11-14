@@ -75,9 +75,9 @@ gh pr checks <pr> --watch                      # returns when the checks finish;
 gh pr review <pr> --approve --body "Ready to merge: <the checks you ran>"
 ```
 
-The supervisor merges (`gh pr merge <pr> --merge --match-head-commit <sha>`, after the label); its queue is
-`gh pr list --base <base> --search "review:approved"`. The coordinator never merges, closes or pushes
-to `<base>`. To be told when a pull request is merged without a watcher plugin: `gh pr checks` for the checks, then
+The owner merges (`gh pr merge <pr> --merge --match-head-commit <sha>`, after the owner-applied label); pull requests
+waiting for the owner: `gh pr list --base <base> --search "review:approved"`. The coordinator never merges, closes or
+pushes to `<base>`. To be told when a pull request is merged without a watcher plugin: `gh pr checks` for the checks, then
 `until [ "$(gh pr view <pr> --json state --jq .state)" != OPEN ]; do sleep 60; done` in the shell, when a session
 really needs to wait; most of the time the next session reads `gh pr list` instead.
 Once merged, if the issue is still open (GitHub closes on the default branch only):
@@ -93,12 +93,12 @@ not as a failure to brief again. The coordinator never applies the label.
 ## After the batch (step 9)
 
 The core checks once, after the last merge, then `HANDOFF.md` and `ROADMAP.md` in one commit on a coordinator branch,
-opened as a pull request labelled `coordinator` and merged by the supervisor like any other. Clean up:
+opened as a pull request labelled `coordinator` and merged by the owner like any other. Clean up:
 `git worktree list`, then `git worktree remove .worktrees/issue-<n>` for each merged issue (never forced).
 
 ## Two coordinators at once
 
-The supervisor may run one coordinator per milestone, at most two at once (`AGENTS.md` › Roles). Each works in its own
+The owner starts one coordinator per milestone branch, at most two at once (`AGENTS.md` › Roles). Each works in its own
 clone, because `.worktrees/`, `.bive/state/` and the guard belong to one checkout:
 
 ```bash
@@ -107,7 +107,7 @@ gh pr list --base milestone/<name>                    # the pull requests this c
 gh pr list --label coordinator --state open           # before opening a coordinator PR on an inviolable file: empty
 ```
 
-At gate 1 each milestone lists the files it will touch; where the two lists overlap, the supervisor names one writer
+At gate 1 each milestone lists the files it will touch; where the two lists overlap, the owner names one writer
 or the order, and the brief says so. Each coordinator writes only its milestone's section of `HANDOFF.md` and
 `ROADMAP.md`.
 

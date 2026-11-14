@@ -9,26 +9,27 @@ line. A delegate's work that a reviewer rejects is redone by the next model, not
 
 ## Coordinator selection and owner-approved team
 
-The supervisor's project additions in `.bive/prompts/project/SUPERVISOR.md` apply before starting or replacing a
-coordinator. Prefer the strongest suitable model whose current free pricing and usability can be verified, while
-preserving every existing qualification and owner allow-list requirement. A listing is not availability, a successful
-tiny request is not a capability benchmark, and unknown pricing is not free. State the evidence and uncertainty
-instead of claiming an objectively best model without a comparison.
+Before starting or replacing a coordinator, the owner-approved team rules below apply; the owner alone approves the
+team and records that approval. The legacy supervisor project additions (`.bive/prompts/project/SUPERVISOR.md`) are
+retired and grant no authority. Prefer the strongest suitable model whose current free pricing and usability can be
+verified, while preserving every existing qualification and owner allow-list requirement. A listing is not
+availability, a successful tiny request is not a capability benchmark, and unknown pricing is not free. State the
+evidence and uncertainty instead of claiming an objectively best model without a comparison.
 
 Inspect the available catalog and existing results first. Manually check a shortlisted model with one small synthetic
 request, no tools or private context, and a timeout; record the canonical/resolved ID, UTC time, pricing source, and
 outcome. Do not sweep providers or incur paid/unknown-cost checks without owner permission. Availability is temporary:
 recheck before launch if the evidence is stale or the account, machine, or quota changed.
 
-If no suitable verified-free coordinator is usable, recommend the strongest suitable usable model from the current
-supervisor session's provider, unless the owner names another provider. Do not silently substitute a paid model,
+If no suitable verified-free coordinator is usable, recommend the strongest suitable usable model from the provider of the session preparing the proposal, unless the
+owner names another provider. Do not silently substitute a paid model,
 cross providers, buy credits, or turn on billing. A named but unfunded model is not a usable launch choice.
 
 Ask the owner to approve a concrete team before launching or switching a coordinator:
 
 | Item | What the proposal states |
 | --- | --- |
-| Needed roles | Supervisor, coordinator, and delegates only where the task needs them; canonical model/version per role |
+| Needed roles | Coordinator, delegate, and advisor (read-only advice) only where the task needs them; canonical model/version per role |
 | Suitability | Relevant results, task fit, qualification or allow-list status, and limitations |
 | Cost and availability | Verified-free, paid, or unknown; evidence source and recent check time/outcome |
 | Recommendation | Best supported team, alternatives, current-provider fallback, and a wait/stop choice |
@@ -38,7 +39,9 @@ No general milestone mandate authorizes a model change. On credit, service, rate
 session and work, explain the infrastructure blocker, and obtain approval of the revised team before another
 coordinator takes over. Record the approved model and reason in the handoff and set its Git identity before its next
 commit. An outage alone is not evidence of poor model judgement; assess separately how an agent handles it. This
-policy changes neither delegate fallback nor role rights, merge gates, or qualifications.
+policy changes neither delegate fallback nor role rights, merge gates, or qualifications. Advice-prepared launch text
+is a proposal until the owner records approval of the scope and the team; a qualification or a green check never
+grants authority.
 
 ## Per-machine model aliases
 

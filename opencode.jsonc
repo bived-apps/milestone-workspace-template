@@ -1,12 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "supervisor",
   "agents": {
-    "supervisor": {
-      "description": "Bive supervisor: resolves gates and merges approved pull requests.",
-      "mode": "primary",
-      "system": "{file:./.bive/prompts/SUPERVISOR.md}"
+    "advisor": {
+      "description": "Read-only answer to a question about the current worktree; advice is not authorization.",
+      "mode": "subagent",
+      "system": "{file:./.bive/prompts/ADVISOR.md}",
+      "permissions": [
+        {"action": "*", "resource": "*", "effect": "deny"},
+        {"action": "read", "resource": "*", "effect": "allow"},
+        {"action": "read", "resource": "~/.ssh/*", "effect": "deny"},
+        {"action": "read", "resource": "*/.ssh/*", "effect": "deny"},
+        {"action": "glob", "resource": "*", "effect": "allow"},
+        {"action": "grep", "resource": "*", "effect": "allow"},
+        {"action": "external_directory", "resource": "*", "effect": "deny"}
+      ]
     },
+    "supervisor": {"disabled": true},
     "coordinator": {
       "description": "Bive coordinator: splits work, briefs delegates, and reviews pull requests.",
       "mode": "primary",

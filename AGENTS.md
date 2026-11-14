@@ -5,21 +5,22 @@ Read this file, then [`HANDOFF.md`](HANDOFF.md), before changing anything. Your 
 
 ## Roles
 
-- **Supervisor**: the owner (with their Claude project), another person with theirs, or an agent the owner has
-  qualified with the test of `.bive/templates/supervisor-test.md` (logged in `HANDOFF.md` › Decisions, per model
-  and version; a model that did not pass never merges). Agrees the plan and each epic's split, answers the three
-  gates, and is **the only one who merges or closes a pull request**, on the integration branch as on `main`, with
-  GitHub's merge commit (`gh pr merge --merge`), never squash (it would make the owner the author). Never acts as
-  coordinator or delegate: whoever merges did not write (owner, 2026-11-09). Merges only once the owner's dated label
-  has turned `bive-merge-gate / merge-gate` green (`docs/REQUIRED-CHECKS.md`). Starts the coordinators and arbitrates
-  the files two milestones share (owner, 2026-11-09).
+- **Owner**: the human owner alone holds supervisory authority: authorizes work and merges, merges or closes pull
+  requests, approves teams and the three gates, arbitrates shared files, and releases tests. The owner merges with
+  GitHub's merge commit, pinned to the checked head, after the owner-applied dated label turns
+  `bive-merge-gate / merge-gate` green. Whoever merges did not write. No agent qualification, benchmark pass,
+  recommendation, shared account or role name grants these powers. No agent approves or merges into `main`.
+- **Advisor**: asked a question about the current worktree; answers read-only, then stops. Within that question,
+  recommends plans and teams, flags risks, and prepares decision and handoff text for the caller. Advice is not
+  authorization. Never authorizes work or merges, closes pull requests, approves teams or gates, releases tests, or
+  acts as coordinator or delegate. Historical supervisor qualifications grant no authority.
 - **Coordinator**: one per milestone branch (`milestone/<name>`; Bive's own is `bived`), at most two at once, each
-  started by the supervisor in its own clone; it approves only pull requests based on its branch. Splits, briefs,
-  starts delegates, creates and reviews issue pull requests, approves them and asks the supervisor to merge. Never
+  started with the owner's approval in its own clone; it approves only pull requests based on its branch. Splits, briefs,
+  starts delegates, creates and reviews issue pull requests, approves them and asks the owner to merge. Never
   merges, never closes a pull request, never pushes to the integration branch or `main`, never writes product code: a
   delegate's work that failed twice is split again or raised at gate 2, not taken over (owner, 2026-11-09). Its own
   pull requests (the inviolable files, `HANDOFF.md`, `ROADMAP.md`) go the same way: a branch, a pull request labelled
-  `coordinator`, the supervisor's merge.
+  `coordinator`, the owner's merge.
 - **Delegate**: one issue and one worktree; pushes its branch, returns its report to the coordinator, then stops.
   Never creates a pull request or starts another agent.
 
@@ -63,7 +64,7 @@ Generic, whatever the language (owner, 2026-11-08, taken from the practice of th
   is required: plain `git config` writes the config every worktree shares, so one delegate's name becomes everyone's;
   it needs `git config extensions.worktreeConfig true` once per clone. The name is that of the model running now:
   when the session's model changes, set it again before the next commit and sign comments with the new name. Merges
-  are merge commits made by the supervisor, so every commit keeps its author; GitHub's squash button would attribute
+  are merge commits made by the owner, so every commit keeps its author; GitHub's squash button would attribute
   the result to the account that pressed it and is disabled in the repository's settings. Anyone must be able to tell
   from `git log` who wrote each change, human or model.
 - **No Git hooks**: a delegate is started by the coordinator, never by a Git command.
@@ -76,16 +77,16 @@ Generic, whatever the language (owner, 2026-11-08, taken from the practice of th
   plugin refuses these writes (each refusal counts as a violation in the registry) and the `bive-inviolable` check
   fails any `issue/*` pull request that touches them, unless it carries the label `coordinator`: the coordinator's
   own pull requests, the only ones that may change these files (only the coordinator sets that label).
-- **Others complete, never edit, the role prompts**: the supervisor or the coordinator adds to a role in
+- **Others complete, never edit, the role prompts**: the owner or the coordinator adds to a role in
   `.bive/prompts/project/<ROLE>.md`, which may narrow a rule but never loosen or contradict one; the core prompt wins.
 
 ## Field reports
 
 - **When**: at the end of each milestone (with gate 3), and at once when a Bive rule, prompt, template or plugin had
   to be worked around or overridden.
-- **How**: the coordinator (or the supervisor) fills `.bive/templates/field-report.md`: numbered remarks, each with
+- **How**: the coordinator  fills `.bive/templates/field-report.md`: numbered remarks, each with
   what happened (numbers), what worked, the proposed change and the Bive file it touches. The project's owner passes
-  it to Bive's supervisor, who files one issue per change in Bive's repository.
+  it to Bive's owner, who files one issue per change in Bive's repository.
 - **No names**: no project, product, repository, person, host, path or private data; "a project", "machine A",
   "the owner". Model ids stay canonical (Bive needs them per model).
 

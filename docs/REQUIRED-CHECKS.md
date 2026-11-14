@@ -50,7 +50,7 @@ These run on GitHub and appear as commit statuses on a pull request.
   call limited to 15 seconds) until the other checks have finished, then decides.
 - **Authorization**: exactly one label `bive-merge-authorized-until-YYYY-MM-DD` on the pull request, a real calendar
   date, valid through 23:59:59 UTC of that date and only while the base is `bived` or `milestone/<name>` (one path
-  segment). Only the owner applies it, after the coordinator's approval and when the supervisor is about to merge;
+  segment). Only the owner applies it, after the coordinator's approval and when the owner is about to merge;
   the coordinator never does, also on its own pull requests. Adding or removing it re-runs the gate.
 - **Red before the label is expected**: on every pull request without the label the gate fails with "exactly one
   dated merge-authorization label is required". It means "waiting for the owner", not a failure to fix.
@@ -61,9 +61,9 @@ These run on GitHub and appear as commit statuses on a pull request.
 - **Fails on**: a missing, malformed, duplicate or expired label; any check pending past the deadline, missing,
   skipped (other than the exception), failed or cancelled; a pull request whose head or base changed during the run.
 - **Several coordinators**: each approves only pull requests based on its own milestone branch; the gate does not
-  check which coordinator approved, the supervisor does (`AGENTS.md` › Roles).
+  check which coordinator approved, each coordinator enforces that itself (`AGENTS.md` › Roles).
 - **Expiry is not re-evaluated on its own**: a gate that passed stays green after its date. The owner applies the
-  label dated the day of the merge, and the supervisor merges that day with `gh pr merge --merge
+  label dated the day of the merge, and the owner merges that day with `gh pr merge --merge
   --match-head-commit <sha>`, so a push after the gate's run refuses the merge.
 
 ## Branch protection (owner, in GitHub's settings)
@@ -74,7 +74,7 @@ require the status checks `bive-merge-gate / merge-gate` and `bive-tests / tests
 `bive-inviolable / check`, including its skip on coordinator pull requests. A ruleset names a required check by its
 job (check-run) name alone, `merge-gate` and `tests` with GitHub Actions as source: every workflow's job keeps a
 name of its own, or the requirement matches several checks (#94). Until that configuration exists, the
-gate is only as strong as the supervisor's procedure. No file in this repository proves that it exists; check the
+gate is only as strong as the owner's merge procedure. No file in this repository proves that it exists; check the
 settings.
 
 ## Local and manual checks (not GitHub statuses)
@@ -96,6 +96,6 @@ commit checks on a pull request.
 - It does not prove which checks GitHub branch protection currently requires, nor that any check is marked
   "required" in repository settings. Branch protection and rulesets are configured under the repository's settings;
   compare them against the checks listed here.
-- It does not say who merges: the supervisor alone, after the coordinator's approval (`AGENTS.md` › Roles).
+- It does not say who merges: the owner alone, after the coordinator's review (`AGENTS.md` › Roles).
 - Workflow job names are part of the check identity. If a workflow or job is renamed, update this document and the
   repository's branch-protection configuration together so they keep matching.

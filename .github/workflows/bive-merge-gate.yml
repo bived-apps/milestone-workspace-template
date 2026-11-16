@@ -6,10 +6,10 @@ on:
     types: [opened, synchronize, reopened, labeled, unlabeled]
 
 permissions:
-  actions: read
   contents: read
   pull-requests: read
   checks: read
+  actions: read   # gh pr checks reads each check's workflow run; required on private repositories (#101)
 
 jobs:
   merge-gate:
